@@ -49,6 +49,7 @@ public class Radio {
             return;
         }
             if(currentStation == minStation) {
+                currentStation = maxStation;
                 return;
         }
         currentStation--;
@@ -61,6 +62,7 @@ public class Radio {
             return;
         }
         if (currentStation == maxStation) {
+            currentStation = minStation;
             return;
         }
         currentStation++;
