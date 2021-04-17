@@ -7,6 +7,8 @@ public class Radio {
     private int minStation;
     private boolean prevButton;
     private boolean nextButton;
+    private boolean upVolume;
+    private boolean downVolume;
     private int currentVolume;
     private int maxVolume;
     private int minVolume;
@@ -48,9 +50,9 @@ public class Radio {
         if (this.prevButton == false) {
             return;
         }
-            if(currentStation == minStation) {
-                currentStation = maxStation;
-                return;
+        if (currentStation == minStation) {
+            currentStation = maxStation;
+            return;
         }
         currentStation--;
     }
@@ -58,7 +60,7 @@ public class Radio {
 
     public void setNextButton(boolean nextButton) {
         this.nextButton = nextButton;
-        if (this.nextButton == false){
+        if (this.nextButton == false) {
             return;
         }
         if (currentStation == maxStation) {
@@ -73,14 +75,29 @@ public class Radio {
     }
 
     public void setCurrentVolume(int currentVolume) {
-
-        if (currentVolume < minVolume) {
-            return;
-        }
-        if (currentVolume > maxVolume) {
-            return;
-        }
         this.currentVolume = currentVolume;
+    }
+
+    public void setUpVolume(boolean upVolume) {
+        this.upVolume = upVolume;
+        if (this.upVolume == false) {
+            return;
+        }
+        if (currentVolume == maxVolume) {
+            return;
+        }
+        currentVolume++;
+    }
+
+    public void setDownVolume(boolean downVolume) {
+        this.downVolume = downVolume;
+        if (this.downVolume == false) {
+            return;
+        }
+        if (currentVolume == minVolume) {
+            return;
+        }
+        currentVolume--;
     }
 
     public int getMaxVolume() {

@@ -48,18 +48,36 @@ class RadioTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'(Volume 11)'| 10 | 0 | 11 | 0 ",
-                    "'(Volume 9)' | 10 | 0 | 9  | 9 ",
-                    "'(Volume 0)' | 10 | 2 | 1  | 0 "
+                    "'(Start volume 9, true button)' | true  | 10 | 9  | 10 ",
+                    "'(Start volume 10, true button)'| true  | 10 | 10 | 10 ",
+                    "'(Start volume 5, false button)'| false | 10 | 5  | 5 "
             },
             delimiter = '|'
     )
-    void setCurrentVolume(String test, int maxVolume, int minVolume, int currentVolume, int expected) {
+    void setUpVolume (String test, boolean upVolume, int maxVolume,  int currentVolume, int expected) {
         Radio station = new Radio();
 
         station.setMaxVolume(maxVolume);
+        station.setCurrentVolume(currentVolume);
+        station.setUpVolume(upVolume);
+        assertEquals(expected,station.getCurrentVolume());
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            value = {
+                    "'(Start volume 1, true button)' | true  | 0 | 1  | 0 ",
+                    "'(Start volume 0, true button)' | true  | 0 | 0  | 0 ",
+                    "'(Start volume 5, false button)'| false | 0 | 5  | 5 "
+            },
+            delimiter = '|'
+    )
+    void setDownVolume (String test, boolean downVolume, int minVolume,  int currentVolume, int expected) {
+        Radio station = new Radio();
+
         station.setMinVolume(minVolume);
         station.setCurrentVolume(currentVolume);
-        assertEquals(expected, station.getCurrentVolume());
+        station.setDownVolume(downVolume);
+        assertEquals(expected,station.getCurrentVolume());
     }
 }
