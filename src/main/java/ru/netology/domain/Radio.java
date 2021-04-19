@@ -5,10 +5,6 @@ public class Radio {
     private int currentStation;
     private int maxStation;
     private int minStation;
-    private boolean prevButton;
-    private boolean nextButton;
-    private boolean upVolume;
-    private boolean downVolume;
     private int currentVolume;
     private int maxVolume;
     private int minVolume;
@@ -22,6 +18,12 @@ public class Radio {
     }
 
     public void setCurrentStation(int currentStation) {
+        if(currentStation < minStation) {
+            return;
+        }
+        if(currentStation > maxStation){
+            return;
+        }
         this.currentStation = currentStation;
     }
 
@@ -45,11 +47,7 @@ public class Radio {
         this.minStation = minStation;
     }
 
-    public void setPrevButton(boolean prevButton) {
-        this.prevButton = prevButton;
-        if (this.prevButton == false) {
-            return;
-        }
+    public void setPrevButton() {
         if (currentStation == minStation) {
             currentStation = maxStation;
             return;
@@ -58,11 +56,7 @@ public class Radio {
     }
 
 
-    public void setNextButton(boolean nextButton) {
-        this.nextButton = nextButton;
-        if (this.nextButton == false) {
-            return;
-        }
+    public void setNextButton() {
         if (currentStation == maxStation) {
             currentStation = minStation;
             return;
@@ -78,22 +72,14 @@ public class Radio {
         this.currentVolume = currentVolume;
     }
 
-    public void setUpVolume(boolean upVolume) {
-        this.upVolume = upVolume;
-        if (this.upVolume == false) {
-            return;
-        }
+    public void setUpVolume() {
         if (currentVolume == maxVolume) {
             return;
         }
         currentVolume++;
     }
 
-    public void setDownVolume(boolean downVolume) {
-        this.downVolume = downVolume;
-        if (this.downVolume == false) {
-            return;
-        }
+    public void setDownVolume() {
         if (currentVolume == minVolume) {
             return;
         }
