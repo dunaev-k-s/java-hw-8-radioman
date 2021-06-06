@@ -10,88 +10,91 @@ class RadioTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'(Start station 0)' | 0 | 9 | 0 | 9 ",
-                    "'(Start station 9)' | 0 | 9 | 9 | 8 ",
+                    "'(Start station 0)'   | 100 |  0  | 100 ",
+                    "'(Start station 100)' | 100 | 100 | 99  ",
             },
             delimiter = '|'
     )
-    void setPrevButtonTest (String test, int minStation, int maxStation,  int currentStation, int expected) {
-        Radio station = new Radio();
+    void setPrevButtonTest(String test,
+                           int maxStation,
+                           int currentStation,
+                           int expected) {
 
-        station.setMinStation(minStation);
-        station.setMaxStation(maxStation);
-        station.setCurrentStation(currentStation);
+        Radio station = new Radio(currentStation, maxStation);
         station.setPrevButton();
-        assertEquals(expected,station.getCurrentStation());
+        assertEquals(expected, station.getCurrentStation());
     }
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'(Start station 7)' | 0 | 9 | 7 | 8 ",
-                    "'(Start station 9)' | 0 | 9 | 9 | 0 ",
+                    "'(Start station 98)'  | 100 | 98  | 99 ",
+                    "'(Start station 100)' | 100 | 100 | 0  ",
             },
             delimiter = '|'
     )
-    void setNextButtonTest (String test, int minStation, int maxStation,  int currentStation, int expected) {
-        Radio station = new Radio();
+    void setNextButtonTest(String test,
+                           int maxStation,
+                           int currentStation,
+                           int expected) {
 
-        station.setMinStation(minStation);
-        station.setMaxStation(maxStation);
-        station.setCurrentStation(currentStation);
+        Radio station = new Radio(currentStation, maxStation);
         station.setNextButton();
-        assertEquals(expected,station.getCurrentStation());
+        assertEquals(expected, station.getCurrentStation());
     }
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'(Start volume 9)' | 10 | 9  | 10 ",
-                    "'(Start volume 10)'| 10 | 10 | 10 ",
+                    "'(Start volume 99)' | 99  | 100 ",
+                    "'(Start volume 100)'| 100 | 100 ",
             },
             delimiter = '|'
     )
-    void setUpVolumeTest (String test,  int maxVolume,  int currentVolume, int expected) {
-        Radio station = new Radio();
+    void setUpVolumeTest(String test,
+                         int currentVolume,
+                         int expected) {
 
-        station.setMaxVolume(maxVolume);
+        Radio station = new Radio();
         station.setCurrentVolume(currentVolume);
         station.setUpVolume();
-        assertEquals(expected,station.getCurrentVolume());
+        assertEquals(expected, station.getCurrentVolume());
     }
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'(Start volume 1 )' | 0 | 1 | 0 ",
-                    "'(Start volume 0 )' | 0 | 0 | 0 ",
+                    "'(Start volume 2 )' | 2 | 1 ",
+                    "'(Start volume 0 )' | 0 | 0 ",
             },
             delimiter = '|'
     )
-    void setDownVolumeTest (String test, int minVolume,  int currentVolume, int expected) {
-        Radio station = new Radio();
+    void setDownVolumeTest(String test,
+                           int currentVolume,
+                           int expected) {
 
-        station.setMinVolume(minVolume);
+        Radio station = new Radio();
         station.setCurrentVolume(currentVolume);
         station.setDownVolume();
-        assertEquals(expected,station.getCurrentVolume());
+        assertEquals(expected, station.getCurrentVolume());
     }
 
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'(Start station 0)' | 0 | 9 | 10 | 0 ",
-                    "'(Start station 9)' | 1 | 9 | 0  | 0 ",
-                    "'(Start station 9)' | 0 | 9 | 7  | 7 ",
+                    "'(Start station 0)' | 100 | 10 | 101 | 10 ",
+                    "'(Start station 9)' | 9   | 7  | 9   | 9  ",
             },
             delimiter = '|'
     )
-    void setCurrentStationTest (String test, int minStation, int maxStation,  int currentStation, int expected) {
-        Radio station = new Radio();
-
-        station.setMinStation(minStation);
+    void setCurrentStationTest(String test,
+                               int maxStation,
+                               int currentStation,
+                               int setStation,
+                               int expected) {
+        Radio station = new Radio(currentStation, maxStation);
         station.setMaxStation(maxStation);
-        station.setCurrentStation(currentStation);
-        assertEquals(expected,station.getCurrentStation());
-    }
+        station.setCurrentStation(setStation);
+        assertEquals(expected, station.getCurrentStation());
+  }
 }
