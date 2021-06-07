@@ -10,17 +10,17 @@ class RadioTest {
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "'(Start station 0)'   | 100 |  0  | 100 ",
-                    "'(Start station 100)' | 100 | 100 | 99  ",
+                    "'(Start station 0)'   | 100 |  0  | 99 ",
+                    "'(Start station 100)' | 100 | 99 | 98  ",
             },
             delimiter = '|'
     )
     void setPrevButtonTest(String test,
-                           int maxStation,
+                           int stationsQuantity,
                            int currentStation,
                            int expected) {
 
-        Radio station = new Radio(currentStation, maxStation);
+        Radio station = new Radio(currentStation, stationsQuantity);
         station.setPrevButton();
         assertEquals(expected, station.getCurrentStation());
     }
@@ -29,16 +29,16 @@ class RadioTest {
     @CsvSource(
             value = {
                     "'(Start station 98)'  | 100 | 98  | 99 ",
-                    "'(Start station 100)' | 100 | 100 | 0  ",
+                    "'(Start station 100)' | 100 | 99 | 0  ",
             },
             delimiter = '|'
     )
     void setNextButtonTest(String test,
-                           int maxStation,
+                           int stationsQuantity,
                            int currentStation,
                            int expected) {
 
-        Radio station = new Radio(currentStation, maxStation);
+        Radio station = new Radio(currentStation, stationsQuantity);
         station.setNextButton();
         assertEquals(expected, station.getCurrentStation());
     }
