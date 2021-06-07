@@ -3,11 +3,25 @@ package ru.netology.domain;
 public class Radio {
     private String name;
     private int currentStation;
-    private int maxStation;
-    private int minStation;
+    private int maxStation = 9;
     private int currentVolume;
-    private int maxVolume;
+    private int maxVolume = 100;
     private int minVolume;
+    private int stationsQuantity = 10;
+
+    public Radio() {
+    }
+
+    public Radio(int stationsQuantity) {
+        this.stationsQuantity = stationsQuantity;
+        maxStation = stationsQuantity - 1;
+    }
+
+    public Radio(int currentStation, int stationsQuantity ) {
+        this.stationsQuantity = stationsQuantity;
+        this.currentStation = currentStation;
+        maxStation = stationsQuantity - 1;
+    }
 
     public String getName() {
         return name;
@@ -18,9 +32,6 @@ public class Radio {
     }
 
     public void setCurrentStation(int currentStation) {
-        if(currentStation < minStation) {
-            return;
-        }
         if(currentStation > maxStation){
             return;
         }
@@ -39,16 +50,8 @@ public class Radio {
         this.maxStation = maxStation;
     }
 
-    public int getMinStation() {
-        return minStation;
-    }
-
-    public void setMinStation(int minStation) {
-        this.minStation = minStation;
-    }
-
     public void setPrevButton() {
-        if (currentStation == minStation) {
+        if (currentStation == 0) {
             currentStation = maxStation;
             return;
         }
@@ -58,7 +61,7 @@ public class Radio {
 
     public void setNextButton() {
         if (currentStation == maxStation) {
-            currentStation = minStation;
+            currentStation = 0;
             return;
         }
         currentStation++;
@@ -100,5 +103,13 @@ public class Radio {
 
     public void setMinVolume(int minVolume) {
         this.minVolume = minVolume;
+    }
+
+    public int getStationsQuantity() {
+        return stationsQuantity;
+    }
+
+    public void setStationsQuantity(int stationsQuantity) {
+        this.stationsQuantity = stationsQuantity;
     }
 }
