@@ -1,5 +1,10 @@
 package ru.netology.domain;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class Radio {
     private String name;
     private int currentStation;
@@ -8,8 +13,6 @@ public class Radio {
     private int maxVolume = 100;
     private int minVolume;
 
-    public Radio() {
-    }
 
     public Radio(int maxStation) {
         this.maxStation = maxStation;
@@ -20,31 +23,11 @@ public class Radio {
         this.currentStation = currentStation;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setCurrentStation(int currentStation) {
         if(currentStation > maxStation){
             return;
         }
         this.currentStation = currentStation;
-    }
-
-    public int getCurrentStation() {
-        return currentStation;
-    }
-
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public void setMaxStation(int maxStation) {
-        this.maxStation = maxStation;
     }
 
     public void setPrevButton() {
@@ -64,14 +47,6 @@ public class Radio {
         currentStation++;
     }
 
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void setCurrentVolume(int currentVolume) {
-        this.currentVolume = currentVolume;
-    }
-
     public void setUpVolume() {
         if (currentVolume == maxVolume) {
             return;
@@ -84,21 +59,5 @@ public class Radio {
             return;
         }
         currentVolume--;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-
-    public void setMaxVolume(int maxVolume) {
-        this.maxVolume = maxVolume;
-    }
-
-    public int getMinVolume() {
-        return minVolume;
-    }
-
-    public void setMinVolume(int minVolume) {
-        this.minVolume = minVolume;
     }
 }
